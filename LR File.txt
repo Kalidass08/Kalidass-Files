@@ -1,0 +1,35 @@
+	
+Search text in LR:
+ 	web_reg_find("Text/IC=  basic necessities.","Savecount=Textcheck1",LAST);
+
+Correlation :
+ 	web_reg_save_param("c_osCsid","LB=osCsid","RB=; path=/;",LAST);
+	web_reg_save_param("c_csrf","LB/IC=name=\"_csrf\" value=\"","RB/IC=\"/>",LAST);
+
+Start Transaction (ctrl + t):
+	lr_start_transaction("newTours_Registeration_t01_launchurl");
+
+End Transaction with IF Statement (ctrl + shift + t):
+	if(atoi(lr_eval_string("{Textcheck1}"))>0)
+        {
+                     lr_end_transaction("newTours_Registeration_t01_launchurl", LR_PASS);                
+        }
+        else
+        {
+          lr_end_transaction("newTours_Registeration_t01_launchurl", LR_FAIL);                  
+        }
+
+Think Time :
+	lr_think_time(10);
+
+Corelate max len :
+	web_set_max_html_param_len("999999");
+
+Proxy Error :
+	web_set_user("841846",lr_decrypt("5e2a959599366953bd87eb7f32a119d938"),"jpetstore.cfapps.io:8080"); 
+
+Correlation with Ordinal:
+	web_reg_save_param("arrival","LB=<option value=\"","RB=>","ORD=ALL",LAST);
+
+Randomisation:
+	lr_save_string(lr_paramarr_random("depature"),"Depature");
